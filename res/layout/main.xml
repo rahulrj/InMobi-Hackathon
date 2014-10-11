@@ -4,34 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-     <LinearLayout 
- 	 android:layout_width="match_parent"
-  	 android:layout_height="wrap_content"
-  	 android:layout_marginLeft="20px"
-  	 android:layout_marginRight="20px"
-  	 android:orientation="horizontal">
-  
-        <Button
-           android:id="@+id/maps"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_weight="1"
-           android:text="Maps" />
-		
-		<Button
-        android:id="@+id/list"
+      <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="List" 
-        android:layout_weight="1" />
- 
-	</LinearLayout>
-    
-     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/help">
-     </ImageView>
+        android:layout_height="wrap_content" />
      
    <ProgressBar
         android:id="@+id/progressBar"

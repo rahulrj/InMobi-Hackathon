@@ -36,9 +36,12 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -56,34 +59,46 @@ import java.util.concurrent.ExecutionException;
 /**
  * This shows how to draw circles on a map.
  */
-public class MapView extends FragmentActivity implements OnSeekBarChangeListener,
+public class MapViewNGO extends Fragment implements OnSeekBarChangeListener,
         OnInfoWindowClickListener, OnMarkerDragListener, OnMapLongClickListener {
 	
     private static GoogleMap mMap;
     private List<DraggableCircle> mCircles = new ArrayList<DraggableCircle>(1);
     private LatLng latlng;
-    private Ngo[] ngos;
+    //private Ngo[] ngos;
    
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
         
-    	super.onCreate(savedInstanceState);
-    	Bundle bundle = getIntent().getExtras();
-    	Double latitude = bundle.getDouble("latitude");
-    	Double longitude = bundle.getDouble("longitude");
-    	ngos = (Ngo[]) getIntent().getSerializableExtra("Editing");
+    	View view = inflater.inflate(R.layout.map_view, null);
+    	//Bundle bundle = getIntent().getExtras();
+    	Double latitude = getArguments().getDouble("latitude");
+    	Double longitude = getArguments().getDouble("longitude");
+    	//ngos = (Ngo[]) getIntent().getSerializableExtra("Editing");
     	latlng = new LatLng(latitude,longitude);
-        setContentView(R.layout.map_view);
-        
+        Log.d("latitude is",Double.toString(latitude));
+        Log.d("longitude is",Double.toString(longitude));
+        Log.d("length of ngos is",Integer.toString(MainActivity.ngos.length));
         setUpMap();
-        addMarkersToMap(ngos);
+        addMarkersToMap(MainActivity.ngos);
         mMap.setOnInfoWindowClickListener(this);
+        
+        return view;
         
     }
 
+    
+    @Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		
+		
+		
+    }
 
 	@Override
-    protected void onResume() {
+	public void onResume() {
         super.onResume();
         setUpMap();
     }
@@ -92,7 +107,7 @@ public class MapView extends FragmentActivity implements OnSeekBarChangeListener
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+            mMap = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map))
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
@@ -155,7 +170,7 @@ public class MapView extends FragmentActivity implements OnSeekBarChangeListener
 		
 		 
 		
-		Toast.makeText(getApplicationContext(), marker.getTitle().toString(), Toast.LENGTH_LONG).show();
+		//Toast.makeText(getApplicationContext(), marker.getTitle().toString(), Toast.LENGTH_LONG).show();
 		// TODO Auto-generated method stub
 		
 	}

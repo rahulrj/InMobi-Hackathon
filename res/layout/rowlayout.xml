@@ -1,77 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
      >
 	
-	<TextView
-        android:id="@+id/ngo_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:layout_marginBottom="10dp">
-    </TextView>
+	<RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:id="@+id/ngo_info"
+	   >
     
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal" >
+   <ImageView
+       android:layout_width="80dp"
+       android:layout_height="80dp"
+       android:id="@+id/ngo_image"
+       android:src="@drawable/ngo"/>
+   
+   <TextView 
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="I AM GOONJ"
+       android:layout_marginTop="10dp"
+       android:layout_marginLeft="10dp"
+       android:textSize="16sp"
+       android:layout_toRightOf="@+id/ngo_image"
+       android:id="@+id/ngo_name"
+       android:textColor="#FFFFFF"/>
+   
+   <TextView 
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="16 Amphitheatre Pkwy, Mountain View, CA 94043"
+       android:textColor="#FFFFFF"
+       android:layout_below="@+id/ngo_name"
+       android:layout_toRightOf="@+id/ngo_image"
+       android:id="@+id/ngo_address"
+       android:layout_marginTop="10dp"
+       android:layout_marginLeft="10dp"/>
+   
+    </RelativeLayout>
     
-    <TextView
-        android:id="@+id/ngo_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-   		android:layout_weight="6"
-        android:textSize="18dp">
-    </TextView>
-    
-     <LinearLayout 
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_weight="2"
-    android:orientation="vertical">
-      <ImageView
-        android:layout_width="25px"
-        android:layout_height="25px"
-        android:src="@drawable/wishes"
-        >
-    </ImageView>
-      <TextView
-        android:id="@+id/wishes_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="3"
-        android:textSize="18dp">
-    </TextView>
-    
-    </LinearLayout>
-      <LinearLayout 
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_weight="2"
-    android:orientation="vertical">
-      
-           <ImageView
-        android:layout_width="25px"
-        android:layout_height="25px"
-        android:src="@drawable/events"
-        >
-        
-    </ImageView>
-    <TextView
-        android:id="@+id/events_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="3"
-        android:textSize="18dp">
-    </TextView>
-    
-    </LinearLayout>
-    
-    
-    
-    </LinearLayout>
-    
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/ngo_info"
+	    android:textColor="#FFFF00"
+	    android:textStyle="bold"
+	    android:id="@+id/wishes_count"
+	    android:layout_marginTop="5dp"
+	    android:text="WISHES"/>
+	
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="EVENTS"
+	    android:textColor="#FFFF00"
+	    android:textStyle="bold"
+	    android:id="@+id/events_count"
+	    android:layout_below="@+id/ngo_info"
+	    android:layout_alignParentRight="true"/>
 
-</LinearLayout> 
+</RelativeLayout> 

@@ -66,6 +66,20 @@ public class FetchLatandLng extends AsyncTask<String, String, Ngo[]> {
              HttpResponse httpResponse = httpclient.execute(httppost);
              inputStream = httpResponse.getEntity().getContent();
              
+             try {
+            	 getAllLatsandLngs(inputStream).toString();
+            	 pDialog.dismiss();
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		} catch (JSONException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		} catch (ParseException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+             
          } catch (Exception e) {
              Log.d("InputStream", e.getLocalizedMessage());
          }
@@ -75,18 +89,7 @@ public class FetchLatandLng extends AsyncTask<String, String, Ngo[]> {
     }
     protected void onPostExecute(String file_url) {
         pDialog.dismiss();
-        try {
-        	 getAllLatsandLngs(inputStream).toString();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        
         
     }
     
