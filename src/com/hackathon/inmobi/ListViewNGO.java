@@ -5,6 +5,7 @@ import com.google.android.gms.maps.model.LatLng;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,11 @@ public class ListViewNGO extends Fragment {
   private  Context context;
   private  String[] ngo_names;
   private  String[] ngo_addresses;
-  private  String[] events_numbers;
-  private  String[] wishes_numbers;
+  private  int[] events_numbers;
+  private  int[] wishes_numbers;
   
   public ListViewNGO(){
+	  
 	  
 	  
   }
@@ -41,6 +43,23 @@ public class ListViewNGO extends Fragment {
 			Bundle savedInstanceState) {
       
   	View view = inflater.inflate(R.layout.listview_ngo, null);
+  	
+  	Ngo[] ngos=MainActivity.ngos;
+  	
+  	ngo_names=new String[ngos.length];
+  	ngo_addresses=new String[ngos.length];
+  	events_numbers=new int[ngos.length];
+  	wishes_numbers=new int[ngos.length];
+  	
+  	for(int i=0;i<ngos.length;i++){
+  		
+  		ngo_names[i]=ngos[i].name;
+  		ngo_addresses[i]=ngos[i].address;
+  		events_numbers[i]=ngos[i].events.size();
+  		wishes_numbers[i]=ngos[i].wishes.size();
+  		
+  		
+  	}
   	
   	ListView lv=(ListView)view.findViewById(R.id.ngo_list);
   	ListAdapter lad=new ListAdapter(getActivity(), ngo_names, ngo_addresses, events_numbers, wishes_numbers);

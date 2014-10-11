@@ -2,12 +2,15 @@ package com.hackathon.inmobi;
 
 
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -20,11 +23,16 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar.Tab;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 	
@@ -36,6 +44,7 @@ public class MainActivity extends ActionBarActivity {
 	ActionBar mActionbar;
  
 	Double latitude,longitude;
+	private Menu menu;
 	
 	public static Ngo[] ngos;
 
@@ -161,11 +170,104 @@ public class MainActivity extends ActionBarActivity {
   }
   
   
-  private void setTabs(){
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
 	  
+	  //Toast.makeText(this, "hey", Toast.LENGTH_LONG).show();
+	  getMenuInflater().inflate(R.menu.filter_menu, menu);
+      this.menu = menu;
+      menu.findItem(R.id.filter).setVisible(true);
+      return true;
+      //super.onCreateOptionsMenu(menu);
+  }
+  
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+      switch (item.getItemId()) {
+          case R.id.filter:
+        	  
+        	  showFilters();  
+        	
+          return true;
+              
+      }
+      return super.onOptionsItemSelected(item);
+  }
+  
+  
+ 
+  
+  void showFilters(){
 	  
-	   
-	            
+	  AlertDialog.Builder builderSingle = new AlertDialog.Builder(
+              MainActivity.this);
+      builderSingle.setIcon(R.drawable.ngo_logo);
+      builderSingle.setTitle("Select a Filter");
+      final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+              MainActivity.this,
+              android.R.layout.select_dialog_singlechoice);
+      arrayAdapter.add("Events");
+      arrayAdapter.add("Needs");
+      arrayAdapter.add("Category");
+//      arrayAdapter.add("Umang");
+//      arrayAdapter.add("Gatti");
+//      builderSingle.setNegativeButton("cancel",
+//              new DialogInterface.OnClickListener() {
+//
+//                  @Override
+//                  public void onClick(DialogInterface dialog, int which) {
+//                      dialog.dismiss();
+//                  }
+//              });
+
+      builderSingle.setAdapter(arrayAdapter,
+              new DialogInterface.OnClickListener() {
+
+                  @Override
+                  public void onClick(DialogInterface dialog, int which) {
+                      String strName = arrayAdapter.getItem(which);
+                      ArrayList<Ngo>ngoList=new ArrayList<Ngo>();
+                      
+                      if(which==0){
+                    	  
+                    	  dialog.dismiss();
+                    	  for(int i=0;i<ngos.length;i++){
+                    		  
+                    		  int count=ngos[i].events.size();
+                    		  if(count>0)
+                    			  ngoList.add(ngos[i]);
+                    			                     		  
+                    		  
+                    	  }
+                    	  
+                    	  Toast.makeText(MainActivity.this, ""+ngoList.size(), Toast.LENGTH_LONG).show();
+                    	  
+                    	  Ngo ngo_array[] = new Ngo[ngoList.size()];
+                    	  ngoList.toArray(ngo_array);
+                    	  MapViewNGO.addMarkersToMap(ngo_array);
+                    	  
+                    	  
+                      }
+                      
+//                      AlertDialog.Builder builderInner = new AlertDialog.Builder(
+//                              MainActivity.this);
+//                      builderInner.setMessage(strName);
+//                      builderInner.setTitle("Your Selected Item is");
+//                      builderInner.setPositiveButton("Ok",
+//                              new DialogInterface.OnClickListener() {
+//
+//                                  @Override
+//                                  public void onClick(
+//                                          DialogInterface dialog,
+//                                          int which) {
+//                                      dialog.dismiss();
+//                                  }
+//                              });
+                      //builderInner.show();
+                  }
+              });
+      builderSingle.show();
+	  
 	  
   }
   
@@ -188,6 +290,7 @@ public class MainActivity extends ActionBarActivity {
 				/** tab1 is selected */
 				case 0:
 						
+				    Toast.makeText(MainActivity.this, "hey",Toast.LENGTH_LONG).show();
 					Bundle b=new Bundle();
 				    b.putDouble("latitude", latitude);
 				    b.putDouble("longitude", longitude);
@@ -198,7 +301,7 @@ public class MainActivity extends ActionBarActivity {
 					
 				/** tab2 is selected */
 				case 1:
-					Fragment1 fragment2 = new Fragment1();
+					ListViewNGO fragment2 = new ListViewNGO();
 				    return fragment2;	
 			}
 			

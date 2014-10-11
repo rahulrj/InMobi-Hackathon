@@ -15,11 +15,11 @@ public class ListAdapter extends BaseAdapter{
 	private final Context context;
 	  private final String[] ngo_names;
 	  private final String[] ngo_addresses;
-	  private final String[] events_numbers;
-	  private final String[] wishes_numbers;
+	  private final int[] events_numbers;
+	  private final int[] wishes_numbers;
 	  private static LayoutInflater inflater = null;
 
-    public ListAdapter(Context context, String[] ngo_names, String[] ngo_addresses,String[] events_numbers,String[] wishes_numbers) {
+    public ListAdapter(Context context, String[] ngo_names, String[] ngo_addresses,int[] events_numbers,int[] wishes_numbers) {
         super();
         this.context = context;
         this.ngo_names=ngo_names;
@@ -59,13 +59,13 @@ public class ListAdapter extends BaseAdapter{
         
         TextView ngoName=(TextView)vi.findViewById(R.id.ngo_name);
         TextView ngoAddress=(TextView)vi.findViewById(R.id.ngo_address);
-        TextView wishCount=(TextView)vi.findViewById(R.id.wishes_count);
-        TextView eventsCount=(TextView)vi.findViewById(R.id.events_count);
+        TextView wishCount=(TextView)vi.findViewById(R.id.wishes_count_no);
+        TextView eventsCount=(TextView)vi.findViewById(R.id.events_count_no);
         
         ngoName.setText(ngo_names[position]);
         ngoAddress.setText(ngo_addresses[position]);
-        wishCount.setText(wishes_numbers[position]);
-        eventsCount.setText(events_numbers[position]);
+        wishCount.setText(String.valueOf(wishes_numbers[position]));
+        eventsCount.setText(String.valueOf(events_numbers[position]));
                
        
 

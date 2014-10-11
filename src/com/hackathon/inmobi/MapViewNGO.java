@@ -100,7 +100,7 @@ public class MapViewNGO extends Fragment implements OnSeekBarChangeListener,
 	@Override
 	public void onResume() {
         super.onResume();
-        setUpMap();
+        //setUpMap();
     }
 
    private void setUpMap() {
@@ -178,7 +178,9 @@ public class MapViewNGO extends Fragment implements OnSeekBarChangeListener,
 	 public static void addMarkersToMap(Ngo[] ngos) {
 	        // Uses a colored icon.
 		 
-		 for(int i =0;i<ngos.length;i++) {
+		
+		 mMap.clear();
+				 for(int i =0;i<ngos.length;i++) {
 			
 			 
 			 LatLng latlng = new LatLng(ngos[i].latitude,ngos[i].longitude);
@@ -189,7 +191,7 @@ public class MapViewNGO extends Fragment implements OnSeekBarChangeListener,
 	                .snippet(ngos[i].events.size()+" new wishes, "+ngos[i].wishes.size()+"new events")
 	                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 		 }
-	      	    }
+}
 	
 	
 
