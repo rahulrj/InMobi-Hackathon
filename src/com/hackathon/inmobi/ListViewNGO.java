@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ListViewNGO extends Fragment {
 	
@@ -23,9 +24,12 @@ public class ListViewNGO extends Fragment {
   private  int[] events_numbers;
   private  int[] wishes_numbers;
   
+  public static ListAdapter lad;
+  View view;
+  
   public ListViewNGO(){
 	  
-	  
+	  //populateList();
 	  
   }
 
@@ -37,35 +41,57 @@ public class ListViewNGO extends Fragment {
 //    this.events_numbers=events_numbers;
 //    this.wishes_numbers=wishes_numbers;
 //  }
+  
+  
+  public void populateList(){
+	  
+	  Ngo[] ngos=MainActivity.globalNgoArray;
+	  	
+	  	//Toast.makeText(getActivity(),""+ngos.length,Toast.LENGTH_LONG).show();
+	  	
+	  	ngo_names=new String[ngos.length];
+	  	ngo_addresses=new String[ngos.length];
+	  	events_numbers=new int[ngos.length];
+	  	wishes_numbers=new int[ngos.length];
+	  	
+	  	for(int i=0;i<ngos.length;i++){
+	  		
+	  		ngo_names[i]=ngos[i].name;
+	  		ngo_addresses[i]=ngos[i].address;
+	  		events_numbers[i]=ngos[i].events.size();
+	  		wishes_numbers[i]=ngos[i].wishes.size();
+	  		
+	  		
+	  	}
+	  	
+	  	ListView lv=(ListView)view.findViewById(R.id.ngo_list);
+	  	lad=new ListAdapter(getActivity(), ngo_names, ngo_addresses, events_numbers, wishes_numbers);
+	  	lv.setAdapter(lad);
+	  
+  }
 
   @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
       
-  	View view = inflater.inflate(R.layout.listview_ngo, null);
+  	    view = inflater.inflate(R.layout.listview_ngo, null);
   	
-  	Ngo[] ngos=MainActivity.ngos;
-  	
-  	ngo_names=new String[ngos.length];
-  	ngo_addresses=new String[ngos.length];
-  	events_numbers=new int[ngos.length];
-  	wishes_numbers=new int[ngos.length];
-  	
-  	for(int i=0;i<ngos.length;i++){
-  		
-  		ngo_names[i]=ngos[i].name;
-  		ngo_addresses[i]=ngos[i].address;
-  		events_numbers[i]=ngos[i].events.size();
-  		wishes_numbers[i]=ngos[i].wishes.size();
-  		
-  		
-  	}
-  	
-  	ListView lv=(ListView)view.findViewById(R.id.ngo_list);
-  	ListAdapter lad=new ListAdapter(getActivity(), ngo_names, ngo_addresses, events_numbers, wishes_numbers);
-  	lv.setAdapter(lad);
+  		populateList();
       
       return view;
       
   }
+  
+  
+  @Override
+  public void onResume(){
+	  
+	  super.onResume();
+	  //Toast.makeText(getActivity(),"called",Toast.LENGTH_LONG).show();
+	  
+  }
+  
+  
+  
+  
 }

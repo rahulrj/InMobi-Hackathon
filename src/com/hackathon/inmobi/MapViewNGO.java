@@ -62,9 +62,9 @@ import java.util.concurrent.ExecutionException;
 public class MapViewNGO extends Fragment implements OnSeekBarChangeListener,
         OnInfoWindowClickListener, OnMarkerDragListener, OnMapLongClickListener {
 	
-    private static GoogleMap mMap;
-    private List<DraggableCircle> mCircles = new ArrayList<DraggableCircle>(1);
-    private LatLng latlng;
+    public static GoogleMap mMap;
+    private static List<DraggableCircle> mCircles = new ArrayList<DraggableCircle>(1);
+    private static LatLng latlng;
     //private Ngo[] ngos;
    
     @Override
@@ -103,9 +103,9 @@ public class MapViewNGO extends Fragment implements OnSeekBarChangeListener,
         //setUpMap();
     }
 
-   private void setUpMap() {
+   public  void setUpMap() {
         // Do a null check to confirm that we have not already instantiated the map.
-        if (mMap == null) {
+       // if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map))
                     .getMap();
@@ -115,12 +115,11 @@ public class MapViewNGO extends Fragment implements OnSeekBarChangeListener,
             	 mMap.setOnMarkerDragListener(this);
                  mMap.setOnMapLongClickListener(this);
                
-                 DraggableCircle circle = new DraggableCircle(latlng,mMap);
-                 mCircles.add(circle);
+                
 
                  mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 10.5f));
             }
-        }
+        //}
     }
 
    
@@ -178,9 +177,10 @@ public class MapViewNGO extends Fragment implements OnSeekBarChangeListener,
 	 public static void addMarkersToMap(Ngo[] ngos) {
 	        // Uses a colored icon.
 		 
+		 DraggableCircle circle = new DraggableCircle(latlng,mMap);
+         mCircles.add(circle);
 		
-		 mMap.clear();
-				 for(int i =0;i<ngos.length;i++) {
+         for(int i =0;i<ngos.length;i++) {
 			
 			 
 			 LatLng latlng = new LatLng(ngos[i].latitude,ngos[i].longitude);

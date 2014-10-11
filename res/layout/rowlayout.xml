@@ -73,7 +73,8 @@
 	    android:id="@+id/events_count"
 	    android:layout_below="@+id/ngo_info"
 	    android:layout_marginTop="5dp"
-	    android:layout_toLeftOf="@+id/events_count_no"
+	    android:layout_marginLeft="10dp"
+	    android:layout_toRightOf="@+id/wishes_count_no"
 	    />
 	
 	<TextView 
@@ -81,11 +82,11 @@
 	    android:layout_height="wrap_content"
 	    android:layout_below="@+id/ngo_info"
 	    android:textColor="#FFFFFF"
-	   
+	    android:layout_toRightOf="@+id/events_count"
 	    android:id="@+id/events_count_no"
 	    android:layout_marginTop="5dp"
 	    android:layout_marginLeft="10dp"
-	    android:layout_alignParentRight="true"
+	    
 	    android:text="WISHES"/>
 	
 
