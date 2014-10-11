@@ -24,6 +24,7 @@
 	     android:layout_width="match_parent" 
 	     android:layout_height="wrap_content" 
 	     android:text="SUBMIT"
+	     android:id="@+id/done"
 	     android:layout_weight="1"
 	     
 	     />
@@ -32,6 +33,7 @@
 	     android:layout_width="match_parent" 
 	     android:layout_height="wrap_content" 
 	     android:text="CANCEL"
+	     android:id="@+id/cancel"
 	     android:layout_weight="1"
 	     />
         

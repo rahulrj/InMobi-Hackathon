@@ -20,6 +20,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar.Tab;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,6 +32,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.support.v4.view.MenuItemCompat;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -162,6 +164,9 @@ public class MainActivity extends ActionBarActivity {
 		getMenuInflater().inflate(R.menu.filter_menu, menu);
 		this.menu = menu;
 		menu.findItem(R.id.filter).setVisible(true);
+		//menu.findItem(R.id.action_search).setVisible(true);
+		
+		//SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
 		return true;
 		// super.onCreateOptionsMenu(menu);
 	}
@@ -240,6 +245,13 @@ public class MainActivity extends ActionBarActivity {
 							filterTheMap(ngoList);
 							
 
+						}
+						
+						else if(which==2){
+							
+							Intent i=new Intent(MainActivity.this,FilterScreen.class);
+							startActivityForResult(i, 1);
+							
 						}
 
 					}

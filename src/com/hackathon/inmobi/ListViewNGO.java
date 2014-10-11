@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -64,10 +65,22 @@ public class ListViewNGO extends Fragment {
 	  		
 	  	}
 	  	
-	  	ListView lv=(ListView)view.findViewById(R.id.ngo_list);
+	  	final ListView lv=(ListView)view.findViewById(R.id.ngo_list);
 	  	lad=new ListAdapter(getActivity(), ngo_names, ngo_addresses, events_numbers, wishes_numbers);
 	  	lv.setAdapter(lad);
 	  
+	  	lv.setClickable(true);
+	  	lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+	  	  @Override
+	  	  public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+
+	  	    Object o = lv.getItemAtPosition(position);
+	  	    
+	  	      
+	  	  }
+	  	});
+	  	
   }
 
   @Override
